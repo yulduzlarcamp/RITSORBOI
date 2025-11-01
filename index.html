@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Kodlar — Desktop Tajribasi Mobilda!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0a14;
+            --card: #141424;
+            --text: #e8e8ff;
+            --accent: #00d4ff;
+            --success: #00ff9d;
+            --free: #ff00b8;
+            --border: #252540;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            padding: 0;
+            margin: 0;
+            min-height: 100dvh;
+            overflow-x: hidden;
+        }
+
+        /* Mobil uchun desktop ko'rinishi */
+        @media (max-width: 768px) {
+            html { font-size: 18px; } /* Katta matn */
+            body { padding: 16px; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00d4ff, #ff00b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: #aaa;
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
+
+        /* GRID — HAR QURILMADA 1 KARTA (mobil) yoki 3+ (katta ekran) */
+        .cart {
+            display: grid;
+            gap: 24px;
+            margin: 30px 0;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+            .cart { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .cart { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (min-width: 1400px) {
+            .cart { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .item {
+            background: var(--card);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,212,255,0.2);
+        }
+
+        /* RASMLAR — KATTA, ANIQ, RETINA */
+        .item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            background: #1a1a2e;
+            image-rendering: crisp-edges;
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .item img { image-rendering: -webkit-optimize-contrast; }
+        }
+
+        .info {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info h3 {
+            font-size: 1.6rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info .desc {
+            color: #b8b8d4;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price-free {
+            color: var(--free);
+            font-size: 1.9rem;
+        }
+
+        .promo-display {
+            background: rgba(255,0,184,0.15);
+            border: 2px dashed var(--free);
+            border-radius: 16px;
+            padding: 18px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--free);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-display:hover {
+            background: rgba(255,0,184,0.3);
+            transform: scale(1.02);
+            border-style: solid;
+            box-shadow: 0 8px 20px rgba(255,0,184,0.3);
+        }
+
+        .promo-display.copied {
+            background: var(--success);
+            color: #000;
+            animation: pulse 0.6s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .locked {
+            filter: blur(5px);
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .payme-btn {
+            background: linear-gradient(135deg, #ffcc00, #ffb800);
+            color: #000;
+            padding: 16px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 6px 16px rgba(255,204,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .payme-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,204,0,0.5);
+        }
+
+        .payme-btn i { font-size: 1.4rem; }
+
+        /* Skeleton */
+        .skeleton { background: linear-gradient(90deg, #1a1a2e 25%, #222 50%, #1a1a2e 75%); background-size: 200% 100%; animation: load 1.5s infinite; border-radius: 12px; }
+        @keyframes load { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .skeleton-img { height: 260px; }
+        .skeleton-title { height: 32px; width: 80%; margin: 16px 0 8px; }
+        .skeleton-desc { height: 48px; width: 100%; margin-bottom: 16px; }
+        .skeleton-price { height: 36px; width: 60%; margin-bottom: 16px; }
+        .skeleton-code { height: 60px; border-radius: 16px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Promo Kodlar Sotuvda!</h1>
+        <p class="subtitle">Kompyuterda qanday bo‘lsa — telefonda ham shunday!</p>
+    </header>
+
+    <div class="cart" id="cart-container"></div>
+</div>
+
+<script>
+    // Demo ma'lumotlar
+    const demoPackages = [
+        { id: "1", name: "iPhone 14 Pro Max", desc: "48MP kamera • Dynamic Island • A16 Bionic", price: 18900000, type: "paid", image: "https://via.placeholder.com/800x600/1a1a2e/00d4ff?text=iPhone+14+Pro+Max" },
+        { id: "2", name: "Samsung S20 Ultra", desc: "108MP • 100x zoom • 120Hz ekran", price: 12500000, type: "paid", image: "https://via.placeholder.com/800x600/1a1a2e/ff00b8?text=S20+Ultra" },
+        { id: "3", name: "Nest Hub Max", desc: "10\" ekran • Google Assistant • Kamera", price: 0, type: "free", image: "https://via.placeholder.com/800x600/1a1a2e/00ff9d?text=Nest+Hub+Max" },
+        { id: "4", name: "iPad Pro M2", desc: "12.9\" • M2 chip • 120Hz • LiDAR", price: 16500000, type: "paid", image: "https://via.placeholder.com/800x600/1a1a2e/7c3aed?text=iPad+Pro" }
+    ];
+
+    let packages = JSON.parse(localStorage.getItem('packages') || '[]');
+    if (!packages.length) {
+        packages = demoPackages;
+        localStorage.setItem('packages', JSON.stringify(packages));
+    }
+
+    const promoCodes = JSON.parse(localStorage.getItem('promoCodes') || '{}');
+    const bought = JSON.parse(localStorage.getItem('bought') || '{}');
+
+    function loadPackages() {
+        const container = document.getElementById('cart-container');
+        container.innerHTML = packages.map(p => {
+            const isFree = p.type === 'free';
+            const isBought = bought[p.id];
+            const code = (promoCodes[p.id] || [])[0] || (isFree ? 'FREEBONUS' : 'XXXXXX');
+
+            return `
+                <div class="item">
+                    <img src="${p.image}" alt="${p.name}" loading="lazy">
+                    <div class="info">
+                        <h3>${p.name} ${isFree ? '<i class="fas fa-gift"></i>' : ''}</h3>
+                        <p class="desc">${p.desc}</p>
+                        <div class="price ${isFree ? 'price-free' : ''}">
+                            ${isFree ? '<i class="fas fa-star"></i> TEKİN' : p.price.toLocaleString() + ' so‘m'}
+                        </div>
+
+                        ${isFree ? `
+                        <div class="promo-display" onclick="copyCode('${p.id}', this, true)">${code}</div>
+                        ` : isBought ? `
+                        <div class="promo-display" onclick="copyCode('${p.id}', this, true)">${code}</div>
+                        ` : `
+                        <div class="promo-display locked" onclick="payme('${p.id}', ${p.price})">
+                            <i class="fas fa-lock"></i> TO‘LOV TALAB
+                        </div>
+                        <div class="payme-btn" onclick="payme('${p.id}', ${p.price})">
+                            <i class="fas fa-credit-card"></i> Payme orqali to‘lash
+                        </div>
+                        `}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function payme(id, price) {
+        if (confirm(`💰 ${price.toLocaleString()} so‘m to‘laysizmi?`)) {
+            bought[id] = true;
+            localStorage.setItem('bought', JSON.stringify(bought));
+            loadPackages();
+            alert("✅ To‘lov muvaffaqiyatli! Kod ochildi!");
+        }
+    }
+
+    function copyCode(id, el, force = false) {
+        const pkg = packages.find(p => p.id === id);
+        if (!force && !bought[id] && pkg?.type === 'paid') {
+            alert("Avval to‘lang!");
+            return;
+        }
+        const code = (promoCodes[id] || [])[0] || 'FREEBONUS';
+        navigator.clipboard.writeText(code).then(() => {
+            el.innerHTML = '<i class="fas fa-check"></i> NUSXALANDI!';
+            el.classList.add('copied');
+            setTimeout(() => { el.innerHTML = code; el.classList.remove('copied'); }, 2000);
+        });
+    }
+
+    // Yuklash
+    document.getElementById('cart-container').innerHTML = Array(4).fill().map(() => `
+        <div class="item">
+            <div class="skeleton skeleton-img"></div>
+            <div class="info">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-desc"></div>
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-code"></div>
+            </div>
+        </div>
+    `).join('');
+
+    setTimeout(loadPackages, 800);
+    setInterval(loadPackages, 3000);
+</script>
+
+</body>
+</html>
